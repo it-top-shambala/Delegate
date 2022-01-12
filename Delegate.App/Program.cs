@@ -3,6 +3,8 @@ using Delegate.Lib;
 
 namespace Delegate.App
 {
+    public delegate int Exec(int x, int y);
+    
     internal static class Program
     {
         private static void Main()
@@ -12,12 +14,10 @@ namespace Delegate.App
 
             var exit = false;
             var select = string.Empty;
+            
             Calculate.Log = Log.LogToFile.Log;
             Calculate.Log += Log.LogToConsole.Log;
-            var x = 0;
-            var y = 0;
-            var result = 0;
-            
+
             do
             {
                 CLI.Show("Режимы работы:");
@@ -27,28 +27,19 @@ namespace Delegate.App
                 CLI.Show("4. Деление");
                 CLI.Show("0. Выход");
                 select = CLI.Input("Выберите режим: ");
-
                 switch (select)
                 {
                     case "1":
-                        x = Int32.Parse(CLI.Input("Введите первое число"));
-                        y = Int32.Parse(CLI.Input("Введите второе число"));
-                        result = Calculate.Add(x, y);
+                        Calc(Calculate.Add);
                         break;
                     case "2":
-                        x = Int32.Parse(CLI.Input("Введите первое число"));
-                        y = Int32.Parse(CLI.Input("Введите второе число"));
-                        result = Calculate.Sub(x, y);
+                        Calc(Calculate.Sub);
                         break;
                     case "3":
-                        x = Int32.Parse(CLI.Input("Введите первое число"));
-                        y = Int32.Parse(CLI.Input("Введите второе число"));
-                        result = Calculate.Mul(x, y);
+                        Calc(Calculate.Mul);
                         break;
                     case "4":
-                        x = Int32.Parse(CLI.Input("Введите первое число"));
-                        y = Int32.Parse(CLI.Input("Введите второе число"));
-                        result = Calculate.Div(x, y);
+                        Calc(Calculate.Div);
                         break;
                     case "0":
                         exit = true;
@@ -61,6 +52,13 @@ namespace Delegate.App
             } while (!exit);
             
             CLI.Show("До свидания ...");
+        }
+
+        private static void Calc(Exec exec)
+        {
+            var x = Int32.Parse(CLI.Input("Введите первое число"));
+            var y = Int32.Parse(CLI.Input("Введите второе число"));
+            var result = exec(x, y);
         }
     }
 }
