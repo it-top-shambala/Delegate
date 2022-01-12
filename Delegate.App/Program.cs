@@ -13,6 +13,7 @@ namespace Delegate.App
             var exit = false;
             var select = string.Empty;
             Calculate.Log = Log.LogToFile.Log;
+            Calculate.Log += Log.LogToConsole.Log;
             var x = 0;
             var y = 0;
             var result = 0;
