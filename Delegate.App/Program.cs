@@ -13,8 +13,7 @@ namespace Delegate.App
             Console.WriteLine();
 
             var exit = false;
-            var select = string.Empty;
-            
+
             Calculate.Log = Log.LogToFile.Log;
             Calculate.Log += Log.LogToConsole.Log;
 
@@ -26,7 +25,7 @@ namespace Delegate.App
                 CLI.Show("3. Умножение");
                 CLI.Show("4. Деление");
                 CLI.Show("0. Выход");
-                select = CLI.Input("Выберите режим: ");
+                var select = CLI.Input("Выберите режим: ");
                 switch (select)
                 {
                     case "1":
@@ -56,9 +55,9 @@ namespace Delegate.App
 
         private static void Calc(Exec exec)
         {
-            var x = Int32.Parse(CLI.Input("Введите первое число"));
-            var y = Int32.Parse(CLI.Input("Введите второе число"));
-            var result = exec(x, y);
+            var x = int.Parse(CLI.Input("Введите первое число"));
+            var y = int.Parse(CLI.Input("Введите второе число"));
+            exec(x, y);
         }
     }
 }
