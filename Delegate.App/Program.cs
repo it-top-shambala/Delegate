@@ -2,9 +2,9 @@
 
 namespace Delegate.App
 {
-    class Program
+    internal static class Program
     {
-        static void Main()
+        private static void Main()
         {
             
         }
